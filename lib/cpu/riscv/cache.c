@@ -54,17 +54,20 @@ void flush_dcache_range(uintptr_t start, size_t size)
 	CACHE_OP_RANGE(DCACHE_CIPA_A0, start, size);
 }
 
+// THEAD C906 Registers
+#define TH_MHCR 0x7C1
+
 void enable_dcache(void)
 {
 	asm volatile(
-		"csrs mhcr, %0;" ::"rI"(0x2)
+		"csrs TH_MHCR, %0;" ::"rI"(0x2)
 	);
 }
 
 void disable_dcache(void)
 {
 	asm volatile(
-		"csrc mhcr, %0;" ::"rI"(0x2)
+		"csrc TH_MHCR, %0;" ::"rI"(0x2)
 	);
 }
 

@@ -1,10 +1,13 @@
 #include lib/cpu/${BOOT_CPU}/cpu-ops.mk
 
+#MARCH=-march=rv64imafdcvxthead
+MARCH=-march=rv64imafdc_zicsr_xtheadba_xtheadbb_xtheadbs_xtheadcmo_xtheadcondmov_xtheadfmemidx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync_zifencei
+
 ASFLAGS +=\
 	$(CPPFLAGS) \
 	-DRISCV \
 	-D__ASSEMBLY__ \
-	-march=rv64imafdcvxthead -mstrict-align \
+	$(MARCH) -mstrict-align \
 	-mcmodel=medany \
 	-mabi=lp64d \
 	-ffreestanding  \
@@ -13,7 +16,7 @@ ASFLAGS +=\
 TF_CFLAGS += \
 	$(CPPFLAGS) \
 	-DRISCV \
-	-march=rv64imafdcvxthead \
+	$(MARCH) \
 	-mcmodel=medany \
 	-mabi=lp64d \
 	-ffreestanding -fno-builtin -Wall -std=gnu99 \
